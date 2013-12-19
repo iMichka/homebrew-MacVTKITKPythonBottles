@@ -7,6 +7,12 @@ class Vtk < Formula
 
   head 'https://github.com/Kitware/VTK.git'
 
+  bottle do
+    root_url 'https://sourceforge.net/projects/kitwarebottles/files/vtk/'
+    revision 1
+    sha1 '48f7d78963ce749b475f7c4f3d43ab7fc5e1fcf2' => :mountain_lion
+  end
+
   depends_on 'cmake' => :build
   depends_on :x11 => :optional
   depends_on 'qt' => :optional
