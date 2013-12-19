@@ -1,23 +1,22 @@
 homebrew-kitware
 ================
 
-## The unofficial Kitware homebrew tap :
+## The unofficial Kitware Homebrew tap
 
-This page provides binaries (homebrew bottles) of VTK and ITK for OS X (10.7, 10.8 and 10.9).
+This page provides binaries (Homebrew bottles) of VTK and ITK for OS X (10.7, 10.8 and 10.9).
 
-They are compiled against homebrew's python.
+They are compiled against Homebrew's python.
 
 The files are provided "as is" without warranty or support of any kind. These packages are unofficial, which means they are compiled and distributed without official kitware support.
 
-
-and ITK on OS X you will face the following problems :
-
-## Current versions (needs homebrewed python 2.7.6)
+## Current versions
 
   - VTK 6.0.0
   - ITK 4.5.0
 
-## How to use :
+You will need to have Homebrews python (2.7.6) installed.
+
+## How to use
 
   - brew install python
   - brew tap iMichka/homebrew-kitware
