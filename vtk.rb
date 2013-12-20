@@ -11,6 +11,7 @@ class Vtk < Formula
     root_url 'https://sourceforge.net/projects/kitwarebottles/files/vtk/'
     revision 1
     sha1 '48f7d78963ce749b475f7c4f3d43ab7fc5e1fcf2' => :mountain_lion
+    sha1 'a574146b50848323044612f05184d74e5bf73e8a' => :lion
   end
 
   depends_on 'cmake' => :build
