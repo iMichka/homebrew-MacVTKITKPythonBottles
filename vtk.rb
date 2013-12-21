@@ -10,6 +10,7 @@ class Vtk < Formula
   bottle do
     root_url 'http://download.sf.net/project/kitwarebottles'
     revision 1
+    sha1 '7fc483579d8841aef4c4591c7951f7852ac41ac5' => :mavericks
     sha1 '48f7d78963ce749b475f7c4f3d43ab7fc5e1fcf2' => :mountain_lion
     sha1 'a574146b50848323044612f05184d74e5bf73e8a' => :lion
   end
