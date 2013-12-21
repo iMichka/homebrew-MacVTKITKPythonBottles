@@ -20,8 +20,8 @@ You will need to have Homebrews python (2.7.6) installed.
 
   - brew install python
   - brew tap iMichka/homebrew-kitware
-  - brew install iMichka/homebrew-kitware/vtk
-  - brew install iMichka/homebrew-kitware/insighttoolkit
+  - brew install iMichka/kitware/vtk
+  - brew install iMichka/kitware/insighttoolkit
 
 ## Why unofficial binaries ?
 
