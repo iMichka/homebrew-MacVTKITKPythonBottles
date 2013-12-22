@@ -10,9 +10,9 @@ class Insighttoolkit < Formula
   bottle do
     root_url 'http://download.sf.net/project/kitwarebottles/itk'
     revision 1
-    sha1 '373f54257ed81c0c58db0b65f3b5f373529a6eca' => :mavericks
-    sha1 '373f54257ed81c0c58db0b65f3b5f373529a6eca' => :mountain_lion
-    sha1 '373f54257ed81c0c58db0b65f3b5f373529a6eca' => :lion
+    sha1 '01da44da2b222ab57695d63edf930f9714c69a86' => :mavericks
+    sha1 '01da44da2b222ab57695d63edf930f9714c69a86' => :mountain_lion
+    sha1 '01da44da2b222ab57695d63edf930f9714c69a86' => :lion
   end
 
   depends_on 'cmake' => :build
