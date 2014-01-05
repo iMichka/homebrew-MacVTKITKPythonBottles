@@ -31,10 +31,10 @@ The problem this project tries to tackle is to get ITK to install on OS X with p
 Due to incompatibilities between gccxml and clang (gccxml is converting the highly templated ITK c++ code to xml files, which are then converted for the python wrapping), it is very tedious to install ITK on OS X.
 By the way, the compilation time can be very long (up to 2 hours for ITK), so a fast installation through binaries is always welcome.
 
-I found a way to trick gccxml into finding the right include headers to be able to compile ITK with python wrappers on OS 10.7 and 10.8.
-For OS 10.9, I use the binary compiled under 10.8.5 and rename it for 10.9 (it "just works").
+I found a way to trick gccxml into finding the right include headers to be able to compile ITK with python wrappers on OS 10.7. 
+For OS 10.9 and 10.8, the same binary is used as the one compiled under 10.7. This "just works" for the python bindings. Note that I did not try to use this ITK binaries to build a C++ app with it (feel free to contac me if you tried, input is always welcome).
 
-My trick to get ITK to compile with python wrappings :
+My trick to get ITK to compile with python wrappings under OS 10.7.5:
 
   - Rename /usr/include to /usr/_include
   - brew install insighttoolkit --with-python
