@@ -8,7 +8,7 @@ class Insighttoolkit < Formula
   head 'git://itk.org/ITK.git'
   
   bottle do
-    root_url 'http://download.sf.net/project/kitwarebottles/itk'
+    root_url 'http://download.sf.net/project/macvtkitkpythonbottles/itk'
     revision 1
     sha1 '01da44da2b222ab57695d63edf930f9714c69a86' => :mavericks
     sha1 '01da44da2b222ab57695d63edf930f9714c69a86' => :mountain_lion
