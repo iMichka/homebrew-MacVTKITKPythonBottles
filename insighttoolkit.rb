@@ -21,11 +21,11 @@ class Insighttoolkit < Formula
   depends_on 'vtk' => [:build] + cxx11dep
   depends_on 'opencv' => [:optional] + cxx11dep
   depends_on :python => :optional
-  depends_on 'fftw' => :recommended
-  depends_on 'hdf5' => [:recommended, '--enable-cxx'] + cxx11dep
-  depends_on 'jpeg' => :recommended
-  depends_on :libpng => :recommended
-  depends_on 'libtiff' => :recommended
+  depends_on 'fftw' => :optional
+  depends_on 'hdf5' => [:optional, '--enable-cxx'] + cxx11dep
+  depends_on 'jpeg' => :optional
+  depends_on :libpng => :optional
+  depends_on 'libtiff' => :optional
 
   option 'examples', 'Compile and install various examples'
   option 'with-itkv3-compatibility', 'Include ITKv3 compatibility'
