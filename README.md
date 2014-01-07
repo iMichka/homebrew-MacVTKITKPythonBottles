@@ -1,5 +1,5 @@
-homebrew-kitware
-================
+homebrew-MacVTKITKPythonBottles
+===============================
 
 ## The unofficial VTK ITK Python Homebrew tap
 
