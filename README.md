@@ -41,7 +41,13 @@ My trick to get ITK to compile with Python wrappings under OS 10.7.5:
 
 This is quite a dirty hack, if somebody has an explanation of why it works, feel free to enlight me. The used formulas to built the binaries are the one in this github repository. The VTK formula should be the same as the one in the official homebrew-science repository, the ITK formula is adapted for compilation under OS 10.7.5.
 
-## Possible problems
+## Possible problems and Warnings
 
  - I did not try to use this ITK binaries to build a C++ app with it (feel free to contact me if you tried). So if you try to link against them on 10.8 or 10.9 this will not work as these were compiled under 10.7.
  - The WrapITK.pth file is manually created in /usr/local/lib/python2.7/site-packages. In fact ITK does not have the same folder structure as VTK. I will try to see if I can submit a patch for this as soon as possible. The problem here is that if you *brew uninstall insighttoolkit*, the WrapITK.pth will stay there ...
+ - While tappting this repository you can get the following message :
+   
+   - Warning: Could not tap imichka/macvtkitkpythonbottles/insighttoolkit over homebrew/science/insighttoolkit
+   - Warning: Could not tap imichka/macvtkitkpythonbottles/vtk over homebrew/science/vtk
+   
+   Don't worry thats normal, you can ignore it.
