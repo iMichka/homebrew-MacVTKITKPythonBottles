@@ -1,7 +1,5 @@
-homebrew-MacVTKITKPythonBottles
-===============================
-
-## The unofficial VTK ITK Python Homebrew tap
+The unofficial VTK ITK Python Homebrew tap
+==========================================
 
 This page provides binaries (Homebrew bottles) of VTK and ITK for OS X (10.7, 10.8 and 10.9) with python wrapping.
 
