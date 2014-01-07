@@ -16,7 +16,7 @@ class Insighttoolkit < Formula
   end
 
   depends_on 'cmake' => :build
-  depends_on 'vtk' => :build
+  depends_on 'iMichka/MacVTKITKPythonBottles/vtk' => :build
   depends_on :python => :optional
 
   option 'examples', 'Compile and install various examples'
