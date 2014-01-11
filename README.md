@@ -5,7 +5,9 @@ This page provides binaries (Homebrew bottles) of VTK and ITK for OS X (10.7, 10
 
 They are compiled against Homebrew's python (2.7.6).
 
-The files are provided "as is" without warranty or support of any kind. These packages are compiled and distributed without official Kitware support.
+The VTK and ITK binaries were compiled without specific options, like fftw, freetype, opencv, etc ... but this could still be added if needed.
+
+The files are provided "as is" without warranty or support of any kind. I am not part of Kitware, so these are *unoffical* binaries.
 
 ## Current versions
 
@@ -41,11 +43,15 @@ This is quite a dirty hack, if somebody has an explanation of why it works, feel
 
 ## Possible problems and Warnings
 
- - I did not try to use this ITK binaries to build a C++ app with it (feel free to contact me if you tried). So if you try to link against them on 10.8 or 10.9 this will not work as these were compiled under 10.7.
+ - I did not try to use this ITK binaries to build a C++ app with it. Just tell me if it does not work.
  - The WrapITK.pth file is manually created in /usr/local/lib/python2.7/site-packages. In fact ITK does not have the same folder structure as VTK. I will try to see if I can submit a patch for this as soon as possible. The problem here is that if you *brew uninstall insighttoolkit*, the WrapITK.pth will stay there ...
- - While tappting this repository you can get the following message :
+ - While tapping this repository you can get the following message :
    
    - Warning: Could not tap imichka/macvtkitkpythonbottles/insighttoolkit over homebrew/science/insighttoolkit
    - Warning: Could not tap imichka/macvtkitkpythonbottles/vtk over homebrew/science/vtk
    
    Don't worry thats normal, you can ignore it.
+
+## Future of this project
+
+There are some discussions going on to provide better support for python wrapping at kitware. This is only a temporary solution I provide so that we can still use ITK on OS 10.9, which leaves some time to fix the wrapping problem.
