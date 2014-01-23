@@ -19,7 +19,6 @@ You will need to have Homebrews Python (2.7.6) installed.
 ## How to use
 
   - brew install python
-  - brew tap iMichka/homebrew-MacVTKITKPythonBottles
   - brew install iMichka/MacVTKITKPythonBottles/vtk
   - brew install iMichka/MacVTKITKPythonBottles/insighttoolkit
 
