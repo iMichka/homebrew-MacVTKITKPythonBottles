@@ -22,6 +22,10 @@ You will need to have Homebrews Python (2.7.6) installed.
   - brew install iMichka/MacVTKITKPythonBottles/vtk
   - brew install iMichka/MacVTKITKPythonBottles/insighttoolkit
 
+## Coming soon
+
+VTK 6.1 bottles, with more options built in (freetype, boost, hdf5, ...)
+
 ## Why unofficial binaries ?
 
 For VTK, the advantage is that you don't have to wait for the compilation to finish.
