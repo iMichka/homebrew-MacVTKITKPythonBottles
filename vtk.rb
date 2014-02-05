@@ -2,30 +2,36 @@ require 'formula'
 
 class Vtk < Formula
   homepage 'http://www.vtk.org'
-  url 'http://www.vtk.org/files/release/6.0/vtk-6.0.0.tar.gz'
-  sha1 '51dd3b4a779d5442dd74375363f0f0c2d6eaf3fa'
+  url 'http://www.vtk.org/files/release/6.1/VTK-6.1.0.tar.gz'
+  sha1 '91d1303558c7276f031f8ffeb47b4233f2fd2cd9'
 
   head 'https://github.com/Kitware/VTK.git'
 
   bottle do
     root_url 'http://download.sf.net/project/macvtkitkpythonbottles/vtk'
     revision 1
-    sha1 '7fc483579d8841aef4c4591c7951f7852ac41ac5' => :mavericks
-    sha1 '48f7d78963ce749b475f7c4f3d43ab7fc5e1fcf2' => :mountain_lion
-    sha1 'a574146b50848323044612f05184d74e5bf73e8a' => :lion
+    sha1 '429b42190a6730c697dedcb32e8ca58cbf89d964' => :mavericks
+    sha1 'ee2abbd436684ff6d9b2760b3d464aec204aef15' => :mountain_lion
+    sha1 '51b8c93478022c7668fa4b1ede7495daf7363b79' => :lion
   end
+
+  option :cxx11
 
   depends_on 'cmake' => :build
   depends_on :x11 => :optional
   depends_on 'qt' => :optional
   depends_on :python => :recommended
+  depends_on 'boost' => :recommended
+  depends_on :fontconfig => :recommended
+  depends_on 'hdf5' => :recommended
+  depends_on 'jpeg' => :recommended
+  depends_on :libpng => :recommended
+  depends_on 'libtiff' => :recommended
+  depends_on 'matplotlib' => [:python, :optional]
 
   # If --with-qt and --with-python, then we automatically use PyQt, too!
   if build.with? 'qt'
-    if build.with? 'python3'
-      depends_on 'sip'  => 'with-python3' # because python3 is optional for sip
-      depends_on 'pyqt' => 'with-python3' # because python3 is optional for pyqt
-    elsif build.with? 'python'
+    if build.with? 'python'
       depends_on 'sip'
       depends_on 'pyqt'
     end
@@ -34,12 +40,8 @@ class Vtk < Formula
   option 'examples',  'Compile and install various examples'
   option 'qt-extern', 'Enable Qt4 extension via non-Homebrew external Qt4'
   option 'tcl',       'Enable Tcl wrapping of VTK classes'
-
-  def patches
-    # fixes build on OS X 10.9. This patch is taken from upstream and should be droped when upstrem does a new
-    # release including it.
-    "https://github.com/Kitware/VTK/commit/b9658e5decdbe36b11a8947fb9ba802b92bac8b4.patch" unless build.head?
-  end
+  option 'with-matplotlib', 'Enable matplotlib support'
+  option 'remove-legacy', 'Disable legacy APIs'
 
   def install
     args = std_cmake_args + %W[
@@ -51,6 +53,9 @@ class Vtk < Formula
       -DIOKit:FILEPATH=#{MacOS.sdk_path}/System/Library/Frameworks/IOKit.framework
       -DCMAKE_INSTALL_RPATH:STRING=#{lib}
       -DCMAKE_INSTALL_NAME_DIR:STRING=#{lib}
+      -DVTK_USE_SYSTEM_EXPAT=ON
+      -DVTK_USE_SYSTEM_LIBXML2=ON
+      -DVTK_USE_SYSTEM_ZLIB=ON
     ]
 
     args << '-DBUILD_EXAMPLES=' + ((build.include? 'examples') ? 'ON' : 'OFF')
@@ -76,48 +81,41 @@ class Vtk < Formula
       args << "-DTK_INTERNAL_PATH:PATH=#{MacOS.sdk_path}/System/Library/Frameworks/Tk.framework/Headers/tk-private"
     end
 
+    args << '-DModule_vtkInfovisBoost=ON' << '-DModule_vtkInfovisBoostGraphAlgorithms=ON' if build.with? 'boost'
+    args << '-DModule_vtkRenderingFreeTypeFontConfig=ON' if build.with? 'fontconfig'
+    args << '-DVTK_USE_SYSTEM_HDF5=ON' if build.with? 'hdf5'
+    args << '-DVTK_USE_SYSTEM_JPEG=ON' if build.with? 'jpeg'
+    args << '-DVTK_USE_SYSTEM_PNG=ON' if build.with? :libpng
+    args << '-DVTK_USE_SYSTEM_TIFF=ON' if build.with? 'libtiff'
+    args << '-DModule_vtkRenderingMatplotlib=ON' if build.with? 'matplotlib'
+    args << '-DVTK_LEGACY_REMOVE=ON' if build.include? 'remove-legacy'
+
+    ENV.cxx11 if build.cxx11?
+
     mkdir 'build' do
-      python do
+      if build.with? "python"
         args << '-DVTK_WRAP_PYTHON=ON'
-        # For Xcode-only systems, the headers of system's python are inside of Xcode:
-        args << "-DPYTHON_INCLUDE_DIR='#{python.incdir}'"
-        # Cmake picks up the system's python dylib, even if we have a brewed one:
-        args << "-DPYTHON_LIBRARY='#{python.libdir}/lib#{python.xy}.dylib'"
+        # CMake picks up the system's python dylib, even if we have a brewed one.
+        args << "-DPYTHON_LIBRARY='#{%x(python-config --prefix).chomp}/lib/libpython2.7.dylib'"
         # Set the prefix for the python bindings to the Cellar
-        if !build.head?
-          args << "-DVTK_PYTHON_SETUP_ARGS:STRING='--prefix=#{prefix} --single-version-externally-managed --record=installed.txt'"
-        else
-          # For HEAD, use the new way to define the path for the python files
-          # See https://github.com/Kitware/VTK/commit/bec283263e682a172729b47d31d49e3528d783ac
-          # There is also no more support for setup.py, so no need for :
-          # --single-version-externally-managed --record=installed.txt
-          # For vtk 6.1 we should clean this up and use only the new VTK_INSTALL_PYTHON_MODULE_DIR
-          args << "-DVTK_INSTALL_PYTHON_MODULE_DIR='#{lib}/#{python.xy}/site-packages'"
-        end
+        args << "-DVTK_INSTALL_PYTHON_MODULE_DIR='#{lib}/python2.7/site-packages'"
         if build.with? 'pyqt'
           args << '-DVTK_WRAP_PYTHON_SIP=ON'
-          args << "-DSIP_PYQT_DIR='#{HOMEBREW_PREFIX}/share/sip#{python.if3then3}'"
+          args << "-DSIP_PYQT_DIR='#{HOMEBREW_PREFIX}/share/sip'"
         end
-        # The make and make install have to be inside the python do loop
-        # because the PYTHONPATH is defined by this block (and not outside)
-        args << ".."
-        system 'cmake', *args
-        system 'make'
-        system 'make install'
       end
-      if not python then  # no python bindings
-        args << ".."
-        system 'cmake', *args
-        system 'make'
-        system 'make install'
-      end
+      args << ".."
+      system "cmake", *args
+      system "make"
+      system "make", "install"
     end
 
     (share+'vtk').install 'Examples' if build.include? 'examples'
   end
 
   def caveats
-    s = <<-EOS.undent
+    s = ''
+    s += <<-EOS.undent
         Even without the --with-qt option, you can display native VTK render windows
         from python. Alternatively, you can integrate the RenderWindowInteractor
         in PyQt, PySide, Tk or Wx at runtime. Read more:
