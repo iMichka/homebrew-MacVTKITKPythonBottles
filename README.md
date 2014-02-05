@@ -5,13 +5,13 @@ This page provides binaries (Homebrew bottles) of VTK and ITK for OS X (10.7, 10
 
 They are compiled against Homebrew's python (2.7.6).
 
-The VTK and ITK binaries were compiled without specific options, like fftw, freetype, opencv, etc ... but this could still be added if needed.
+The VTK and ITK binaries were compiled with some specific options, look at the formulas to know which ones. (HDF5, FFTW, ...)
 
 The files are provided "as is" without warranty or support of any kind.
 
 ## Current versions
 
-  - VTK 6.0.0
+  - VTK 6.1.0
   - ITK 4.5.0
 
 You will need to have Homebrews Python (2.7.6) installed.
@@ -21,10 +21,6 @@ You will need to have Homebrews Python (2.7.6) installed.
   - brew install python
   - brew install iMichka/MacVTKITKPythonBottles/vtk
   - brew install iMichka/MacVTKITKPythonBottles/insighttoolkit
-
-## Coming soon
-
-VTK 6.1 bottles, with more options built in (freetype, boost, hdf5, ...)
 
 ## Why unofficial binaries ?
 
@@ -36,7 +32,7 @@ Incidentally, the compilation time can be very long (up to 2 hours for ITK on sl
 
 I found a way to trick GCCXML into finding the right include headers to be able to compile ITK with Python wrappers on OS 10.7. For OS 10.8 and 10.9, the same binary is used as the one compiled under 10.7. This "just works" for the python bindings.(It's no more possible to compile ITK 4.5 under 10.8 and 10.9).
 
-My trick to get ITK to compile with Python wrappings under OS 10.7.5:
+My trick to get ITK to compile with Python wrappings under OS 10.7.5 and OS 10.8.5:
 
   - Rename /usr/include to /usr/_include
   - brew install insighttoolkit --with-python
