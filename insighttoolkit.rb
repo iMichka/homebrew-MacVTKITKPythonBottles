@@ -8,35 +8,39 @@ class Insighttoolkit < Formula
   
   bottle do
     root_url 'http://download.sf.net/project/macvtkitkpythonbottles/itk'
-    revision 1
-    sha1 '01da44da2b222ab57695d63edf930f9714c69a86' => :mavericks
-    sha1 '01da44da2b222ab57695d63edf930f9714c69a86' => :mountain_lion
-    sha1 '01da44da2b222ab57695d63edf930f9714c69a86' => :lion
+    revision 2
+    sha1 'a8ed6fe093efb384219235b01fb6cf3af7e0fad4' => :mavericks
+    sha1 'a8ed6fe093efb384219235b01fb6cf3af7e0fad4' => :mountain_lion
+    sha1 '0d826dc6c1afb7eb2005309bf61640e9bb64ad17' => :lion
   end
 
   option :cxx11
   cxx11dep = (build.cxx11?) ? ['c++11'] : []
 
   depends_on 'cmake' => :build
+  depends_on 'iMichka/MacVTKITKPythonBottles/vtk' => :build
   depends_on 'opencv' => [:optional] + cxx11dep
   depends_on :python => :optional
-  depends_on 'fftw' => :optional
+  depends_on 'fftw' => :recommended
   depends_on 'hdf5' => [:optional, '--enable-cxx'] + cxx11dep
-  depends_on 'jpeg' => :optional
-  depends_on :libpng => :optional
-  depends_on 'libtiff' => :optional
+  depends_on 'jpeg' => :recommended
+  depends_on :libpng => :recommended
+  depends_on 'libtiff' => :recommended
 
   option 'examples', 'Compile and install various examples'
   option 'with-itkv3-compatibility', 'Include ITKv3 compatibility'
-  
-  def patches
-    # Add a patch for ITK 4.5 which fixes the install path for the .pth file
-    DATA unless build.head?
-  end
   option 'remove-legacy', 'Disable legacy APIs'
   option 'with-review', 'Enable modules under review'
+  
+  def patches
+    [
+      'https://gist.github.com/iMichka/8633973/raw/af6a4f93e5fefb902eb900b78623a5e82c2ef59b/Patch+ITK+4.5+10.8.5+python+fixes',
+      'https://gist.github.com/iMichka/8619996/raw/ccda2d0843b3085e7f99ce0e789d3ab3ae929afb/Patch+ITK+4.5+wrapitk.pth',
+    ]
+  end
 
   def install
+    
     args = std_cmake_args + %W[
       -DBUILD_TESTING=OFF
       -DBUILD_SHARED_LIBS=ON
@@ -63,25 +67,17 @@ class Insighttoolkit < Formula
     ENV.cxx11 if build.cxx11?
 
     mkdir 'itk-build' do
-      python do
-        args = args + %W[
+      if build.with? "python"
+        args += %W[
           -DITK_WRAP_PYTHON=ON
           -DModule_ITKVtkGlue=ON
-          -DITK_USE_SYSTEM_GCCXML=OFF
           -DCMAKE_C_FLAGS='-ansi'
         ]
-        # Do not use the system's gccxml. ITK will download a more recent one.
-        # Cmake picks up the system's python dylib, even if we have a brewed one.
-        args << "-DPYTHON_LIBRARY='#{python.libdir}/lib#{python.xy}.dylib'"
-        # The make and make install have to be inside the python do loop
-        # because the PYTHONPATH is defined by this block (and not outside)
-        system "cmake", *args
-        system "make install"
+        # CMake picks up the system's python dylib, even if we have a brewed one.
+        args << "-DPYTHON_LIBRARY=/usr/local/Cellar/python/2.7.6/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib"
       end
-      if not python then  # no python bindings
-        system "cmake", *args
-        system "make install"
-      end
+      system "cmake", *args
+      system "make", "install"
     end
   end
 
@@ -95,21 +91,3 @@ class Insighttoolkit < Formula
   end
 
 end
-
-
-__END__
-diff --git a/Wrapping/Generators/Python/CMakeLists.txt b/Wrapping/Generators/Python/CMakeLists.txt
-index a0c13a4..7c5f5e2 100644
---- a/Wrapping/Generators/Python/CMakeLists.txt
-+++ b/Wrapping/Generators/Python/CMakeLists.txt
-@@ -234,7 +233,8 @@ if(PYTHON_EXECUTABLE)
-   )
- endif()
- 
--string(REGEX REPLACE "\\\\" "/" py_spp_nobackslashes "${py_spp}")
-+string(REGEX REPLACE "\n" "" py_spp_no_newline "${py_spp}")
-+string(REGEX REPLACE "\\\\" "/" py_spp_nobackslashes "${py_spp_no_newline}")
- set(PY_SITE_PACKAGES_PATH "${py_spp_nobackslashes}" CACHE PATH "Python site-packages directory to install a .pth file pointing at WrapITK Python modules.")
- mark_as_advanced(PY_SITE_PACKAGES_PATH)
- if(PY_SITE_PACKAGES_PATH)
---
