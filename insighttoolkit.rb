@@ -24,7 +24,7 @@ class Insighttoolkit < Formula
   depends_on 'fftw' => :recommended
   depends_on 'hdf5' => [:optional, '--enable-cxx'] + cxx11dep
   depends_on 'jpeg' => :recommended
-  depends_on :libpng => :recommended
+  depends_on 'libpng' => :recommended
   depends_on 'libtiff' => :recommended
 
   option 'examples', 'Compile and install various examples'
