@@ -12,7 +12,7 @@ class Vtk < Formula
     revision 1
     sha1 '429b42190a6730c697dedcb32e8ca58cbf89d964' => :mavericks
     sha1 'ee2abbd436684ff6d9b2760b3d464aec204aef15' => :mountain_lion
-    sha1 '51b8c93478022c7668fa4b1ede7495daf7363b79' => :lion
+    sha1 '1ea6e5134ef902136416d839a1dd2565f8970590' => :lion
   end
 
   option :cxx11
@@ -25,7 +25,7 @@ class Vtk < Formula
   depends_on :fontconfig => :recommended
   depends_on 'hdf5' => :recommended
   depends_on 'jpeg' => :recommended
-  depends_on :libpng => :recommended
+  depends_on 'libpng' => :recommended
   depends_on 'libtiff' => :recommended
   depends_on 'matplotlib' => [:python, :optional]
 
