@@ -11,7 +11,7 @@ class Insighttoolkit < Formula
     revision 2
     sha1 'a8ed6fe093efb384219235b01fb6cf3af7e0fad4' => :mavericks
     sha1 'a8ed6fe093efb384219235b01fb6cf3af7e0fad4' => :mountain_lion
-    sha1 '0d826dc6c1afb7eb2005309bf61640e9bb64ad17' => :lion
+    sha1 '57397e57d1439398ddab4a9344849e824b9a6c04' => :lion
   end
 
   option :cxx11
