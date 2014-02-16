@@ -2,16 +2,16 @@ require 'formula'
 
 class Insighttoolkit < Formula
   homepage 'http://www.itk.org'
-  url 'http://downloads.sourceforge.net/project/itk/itk/4.5/InsightToolkit-4.5.0.tar.gz'
+  url 'http://downloads.sourceforge.net/project/itk/itk/4.5/InsightToolkit-4.5.1.tar.gz'
   sha1 '64a01e9464b6bd298ec218420967301590501dc2'
   head 'git://itk.org/ITK.git'
   
   bottle do
     root_url 'http://download.sf.net/project/macvtkitkpythonbottles/itk'
-    revision 2
-    sha1 'a8ed6fe093efb384219235b01fb6cf3af7e0fad4' => :mavericks
-    sha1 'a8ed6fe093efb384219235b01fb6cf3af7e0fad4' => :mountain_lion
-    sha1 '57397e57d1439398ddab4a9344849e824b9a6c04' => :lion
+    revision 1
+    sha1 'dd25938b01677dc790d2d3e897936d07306c94cb' => :mavericks
+    sha1 'dd25938b01677dc790d2d3e897936d07306c94cb' => :mountain_lion
+    sha1 '70e11c44e773a6480d34f5b488a99a0c97ad2097' => :lion
   end
 
   option :cxx11
@@ -31,13 +31,6 @@ class Insighttoolkit < Formula
   option 'with-itkv3-compatibility', 'Include ITKv3 compatibility'
   option 'remove-legacy', 'Disable legacy APIs'
   option 'with-review', 'Enable modules under review'
-  
-  def patches
-    [
-      'https://gist.github.com/iMichka/8633973/raw/af6a4f93e5fefb902eb900b78623a5e82c2ef59b/Patch+ITK+4.5+10.8.5+python+fixes',
-      'https://gist.github.com/iMichka/8619996/raw/ccda2d0843b3085e7f99ce0e789d3ab3ae929afb/Patch+ITK+4.5+wrapitk.pth',
-    ]
-  end
 
   def install
     
@@ -58,7 +51,7 @@ class Insighttoolkit < Formula
     args << '-DITK_USE_SYSTEM_FFTW=ON' << '-DITK_USE_FFTWF=ON' << '-DITK_USE_FFTWD=ON' if build.with? 'fftw'
     args << '-DITK_USE_SYSTEM_HDF5=ON' if build.with? 'hdf5'
     args << '-DITK_USE_SYSTEM_JPEG=ON' if build.with? 'jpeg'
-    args << '-DITK_USE_SYSTEM_PNG=ON' if build.with? :libpng
+    args << '-DITK_USE_SYSTEM_PNG=ON' if build.with? 'libpng'
     args << '-DITK_USE_SYSTEM_TIFF=ON' if build.with? 'libtiff'
     args << '-DITK_LEGACY_REMOVE=ON' if build.include? 'remove-legacy'
     args << '-DModule_ITKReview=ON' if build.with? 'review'
