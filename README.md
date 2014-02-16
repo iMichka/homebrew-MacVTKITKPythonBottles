@@ -12,7 +12,7 @@ The files are provided "as is" without warranty or support of any kind.
 ## Current versions
 
   - VTK 6.1.0
-  - ITK 4.5.0
+  - ITK 4.5.1
 
 You will need to have Homebrews Python (2.7.6) installed.
 
