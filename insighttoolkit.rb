@@ -79,7 +79,7 @@ class Insighttoolkit < Formula
     # Waiting for modification of the ITK install script to have the following structure :
     # /Cellar/insighttoolkit/4.5.0/lib/python/site-packages
     if pour_bottle? and Formula.factory('python').installed?
-      File.open("#{HOMEBREW_PREFIX}/lib/python2.7/site-packages/WrapITK.pth", 'w') {|f| f.write("#{HOMEBREW_PREFIX}/Cellar/insighttoolkit/4.5.0/lib/ITK-4.5/Python") }
+      File.open("#{HOMEBREW_PREFIX}/lib/python2.7/site-packages/WrapITK.pth", 'w') {|f| f.write("#{HOMEBREW_PREFIX}/Cellar/insighttoolkit/4.5.1/lib/ITK-4.5/Python") }
     end
   end
 
