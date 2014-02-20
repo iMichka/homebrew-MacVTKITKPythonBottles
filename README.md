@@ -19,8 +19,8 @@ You will need to have Homebrew's Python (2.7.6) installed.
 ## How to use
 
   - brew install python
-  - brew install iMichka/MacVTKITKPythonBottles/imichka-vtk
-  - brew install iMichka/MacVTKITKPythonBottles/imichka-insighttoolkit
+  - brew install iMichka/MacVTKITKPythonBottles/vtk
+  - brew install iMichka/MacVTKITKPythonBottles/insighttoolkit
 
 ## Why unofficial binaries ?
 

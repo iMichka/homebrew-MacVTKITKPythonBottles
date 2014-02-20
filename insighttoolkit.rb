@@ -1,6 +1,6 @@
 require 'formula'
 
-class ImichkaInsighttoolkit < Formula
+class Insighttoolkit < Formula
   homepage 'http://www.itk.org'
   url 'http://downloads.sourceforge.net/project/itk/itk/4.5/InsightToolkit-4.5.1.tar.gz'
   sha1 '64a01e9464b6bd298ec218420967301590501dc2'
@@ -18,7 +18,7 @@ class ImichkaInsighttoolkit < Formula
   cxx11dep = (build.cxx11?) ? ['c++11'] : []
 
   depends_on 'cmake' => :build
-  depends_on 'iMichka/MacVTKITKPythonBottles/imichka-vtk' => :build
+  depends_on 'iMichka/MacVTKITKPythonBottles/vtk' => :build
   depends_on 'opencv' => [:optional] + cxx11dep
   depends_on :python => :optional
   depends_on 'fftw' => :recommended
