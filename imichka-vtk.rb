@@ -1,6 +1,6 @@
 require 'formula'
 
-class Vtk < Formula
+class ImichkaVtk < Formula
   homepage 'http://www.vtk.org'
   url 'http://www.vtk.org/files/release/6.1/VTK-6.1.0.tar.gz'
   sha1 '91d1303558c7276f031f8ffeb47b4233f2fd2cd9'
