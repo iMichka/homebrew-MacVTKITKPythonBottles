@@ -14,13 +14,13 @@ The files are provided "as is" without warranty or support of any kind.
   - VTK 6.1.0
   - ITK 4.5.1
 
-You will need to have Homebrews Python (2.7.6) installed.
+You will need to have Homebrew's Python (2.7.6) installed.
 
 ## How to use
 
   - brew install python
-  - brew install iMichka/MacVTKITKPythonBottles/vtk
-  - brew install iMichka/MacVTKITKPythonBottles/insighttoolkit
+  - brew install iMichka/MacVTKITKPythonBottles/imichka-vtk
+  - brew install iMichka/MacVTKITKPythonBottles/imichka-insighttoolkit
 
 ## Why unofficial binaries ?
 
@@ -44,12 +44,6 @@ This is quite a dirty hack, if somebody has an explanation of why it works, feel
 
  - I did not try to use this ITK binaries to build a C++ app with it. Just tell me whether it does not work.
  - The WrapITK.pth file is manually created in /usr/local/lib/python2.7/site-packages. ITK does not have the same folder structure as VTK. I will try to see whether I can submit a patch for this soon. The problem here is that if you *brew uninstall insighttoolkit*, the WrapITK.pth will stay there ...
- - While tapping this repository you can get the following message :
-   
-   - Warning: Could not tap imichka/macvtkitkpythonbottles/insighttoolkit over homebrew/science/insighttoolkit
-   - Warning: Could not tap imichka/macvtkitkpythonbottles/vtk over homebrew/science/vtk
-   
-   Don't worry thats normal, you can ignore it.
 
 ## Future of this project
 

@@ -18,7 +18,7 @@ class Insighttoolkit < Formula
   cxx11dep = (build.cxx11?) ? ['c++11'] : []
 
   depends_on 'cmake' => :build
-  depends_on 'iMichka/MacVTKITKPythonBottles/vtk' => :build
+  depends_on 'iMichka/MacVTKITKPythonBottles/imichka-vtk' => :build
   depends_on 'opencv' => [:optional] + cxx11dep
   depends_on :python => :optional
   depends_on 'fftw' => :recommended
