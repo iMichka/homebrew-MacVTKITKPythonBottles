@@ -22,6 +22,17 @@ You will need to have Homebrew's Python (2.7.6) installed.
   - brew install iMichka/MacVTKITKPythonBottles/imichka-vtk
   - brew install iMichka/MacVTKITKPythonBottles/imichka-insighttoolkit
 
+## Possible problems and Warnings
+
+ - I did not try to use this ITK binaries to build a C++ app with it. Just tell me whether it does not work.
+ - The WrapITK.pth file is manually created in /usr/local/lib/python2.7/site-packages. ITK does not have the same folder structure as VTK. I will try to see whether I can submit a patch for this soon. The problem here is that if you *brew uninstall insighttoolkit*, the WrapITK.pth will stay there ...
+ - If you get the following error with ITK (especially on OS 10.7.5), **please install XQartz 2.7.5. This will install the missing file**
+```
+Library not loaded: /opt/X11/lib/libfontconfig.1.dylib
+Referenced from: /usr/local/lib/libvtkRenderingFreeTypeFontConfig-6.1.1.dylib
+Reason: image not found
+```
+
 ## Why unofficial binaries ?
 
 For VTK, the advantage is that you don't have to wait for the compilation to finish.
@@ -39,11 +50,6 @@ My trick to get ITK to compile with Python wrappings under OS 10.7.5 and OS 10.8
   - Rename back /usr/_include to /usr/include
 
 This is quite a dirty hack, if somebody has an explanation of why it works, feel free to enlight me. The used formulas to built the binaries are the one in this github repository. The VTK formula should be the same as the one in the official homebrew-science repository, the ITK formula is adapted for compilation under OS 10.7.5.
-
-## Possible problems and Warnings
-
- - I did not try to use this ITK binaries to build a C++ app with it. Just tell me whether it does not work.
- - The WrapITK.pth file is manually created in /usr/local/lib/python2.7/site-packages. ITK does not have the same folder structure as VTK. I will try to see whether I can submit a patch for this soon. The problem here is that if you *brew uninstall insighttoolkit*, the WrapITK.pth will stay there ...
 
 ## Future of this project
 
