@@ -1,24 +1,25 @@
 require 'formula'
 
-class Insighttoolkit < Formula
+class ImichkaInsighttoolkit < Formula
   homepage 'http://www.itk.org'
   url 'http://downloads.sourceforge.net/project/itk/itk/4.5/InsightToolkit-4.5.1.tar.gz'
-  sha1 '64a01e9464b6bd298ec218420967301590501dc2'
+  sha1 'f228b39783f3490e861006b1d2ad18a5f4d4522d'
   head 'git://itk.org/ITK.git'
   
   bottle do
     root_url 'http://download.sf.net/project/macvtkitkpythonbottles/itk'
-    revision 1
-    sha1 'dd25938b01677dc790d2d3e897936d07306c94cb' => :mavericks
-    sha1 'dd25938b01677dc790d2d3e897936d07306c94cb' => :mountain_lion
-    sha1 '70e11c44e773a6480d34f5b488a99a0c97ad2097' => :lion
+    revision 2
+    sha1 'cd53f0eff716a7ceeb21a7951a831cb73510bd22' => :mavericks
+    sha1 'cd53f0eff716a7ceeb21a7951a831cb73510bd22' => :mountain_lion
+    sha1 '159cc059ae253fdb95d49726fcd9902d4cf84bd2' => :lion
   end
+
 
   option :cxx11
   cxx11dep = (build.cxx11?) ? ['c++11'] : []
 
   depends_on 'cmake' => :build
-  depends_on 'iMichka/MacVTKITKPythonBottles/vtk' => :build
+  depends_on 'iMichka/MacVTKITKPythonBottles/imichka-vtk' => :build
   depends_on 'opencv' => [:optional] + cxx11dep
   depends_on :python => :optional
   depends_on 'fftw' => :recommended
@@ -73,14 +74,15 @@ class Insighttoolkit < Formula
       system "make", "install"
     end
   end
-
+  
   def post_install
     # Put manually the pth file in the site-packages folder
     # Waiting for modification of the ITK install script to have the following structure :
-    # /Cellar/insighttoolkit/4.5.0/lib/python/site-packages
+    # /Cellar/imichka-insighttoolkit/4.5.1/lib/python/site-packages
     if pour_bottle? and Formula.factory('python').installed?
-      File.open("#{HOMEBREW_PREFIX}/lib/python2.7/site-packages/WrapITK.pth", 'w') {|f| f.write("#{HOMEBREW_PREFIX}/Cellar/insighttoolkit/4.5.1/lib/ITK-4.5/Python") }
+      File.open("#{HOMEBREW_PREFIX}/lib/python2.7/site-packages/WrapITK.pth", 'w') {|f| f.write("#{HOMEBREW_PREFIX}/Cellar/imichka-insighttoolkit/4.5.1/lib/ITK-4.5/Python") }
     end
   end
+
 
 end

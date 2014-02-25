@@ -1,18 +1,18 @@
 require 'formula'
 
-class Vtk < Formula
+class ImichkaVtk < Formula
   homepage 'http://www.vtk.org'
   url 'http://www.vtk.org/files/release/6.1/VTK-6.1.0.tar.gz'
   sha1 '91d1303558c7276f031f8ffeb47b4233f2fd2cd9'
 
   head 'https://github.com/Kitware/VTK.git'
-
+  
   bottle do
     root_url 'http://download.sf.net/project/macvtkitkpythonbottles/vtk'
-    revision 1
-    sha1 '429b42190a6730c697dedcb32e8ca58cbf89d964' => :mavericks
-    sha1 'ee2abbd436684ff6d9b2760b3d464aec204aef15' => :mountain_lion
-    sha1 '1ea6e5134ef902136416d839a1dd2565f8970590' => :lion
+    revision 2
+    sha1 '87f689ff7719a061d6e778ed7154f29c9530e773' => :mavericks
+    sha1 '3000d18448fd7df1eda9431deab3e5dc25ef9f0d' => :mountain_lion
+    sha1 '17f099726692a0d273e81c5eaf0633ebcbc6144a' => :lion
   end
 
   option :cxx11
