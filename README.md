@@ -5,7 +5,7 @@ This page provides binaries (Homebrew bottles) of VTK and ITK for OS X (10.7, 10
 
 They are compiled against Homebrew's python (2.7.6).
 
-The VTK and ITK binaries were compiled with some specific options, look at the formulas to know which ones. (HDF5, FFTW, ...)
+The VTK and ITK binaries were compiled with some specific options, look at the formulas to know which ones. (HDF5, FFTW, ...). Note that the formula's names are **imichka-vtk** and **imichka-insighttoolkit**, so that they do not conflict with the formulas in homebrew science. This ensures that the brew upgrade command will update your packages if there are updates here.
 
 The files are provided "as is" without warranty or support of any kind.
 
@@ -19,8 +19,8 @@ You will need to have Homebrew's Python (2.7.6) installed.
 ## How to use
 
   - brew install python
-  - brew install iMichka/MacVTKITKPythonBottles/vtk
-  - brew install iMichka/MacVTKITKPythonBottles/insighttoolkit
+  - brew install iMichka/MacVTKITKPythonBottles/imichka-vtk
+  - brew install iMichka/MacVTKITKPythonBottles/imichka-insighttoolkit
 
 ## Why unofficial binaries ?
 
