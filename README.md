@@ -1,9 +1,7 @@
 VTK ITK Python Homebrew tap
 ===========================
 
-This page provides binaries (Homebrew bottles) of VTK and ITK for OS X (10.7, 10.8 and 10.9) with python wrapping.
-
-They are compiled against Homebrew's python (2.7.6).
+This page provides binaries (Homebrew bottles) of VTK and ITK for OS X (10.7, 10.8 and 10.9) with python wrapping. They are compiled against Homebrew's python (2.7.6).
 
 The VTK and ITK binaries were compiled with some specific options, look at the formulas to know which ones. (HDF5, FFTW, ...). Note that the formula's names are **imichka-vtk** and **imichka-insighttoolkit**, so that they do not conflict with the formulas in homebrew science. This ensures that the brew upgrade command will update your packages if there are updates here.
 
