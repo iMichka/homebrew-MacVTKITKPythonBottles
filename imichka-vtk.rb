@@ -6,13 +6,13 @@ class ImichkaVtk < Formula
   sha1 '91d1303558c7276f031f8ffeb47b4233f2fd2cd9'
 
   head 'https://github.com/Kitware/VTK.git'
-  
+
   bottle do
     root_url 'http://download.sf.net/project/macvtkitkpythonbottles/vtk'
-    revision 2
-    sha1 '87f689ff7719a061d6e778ed7154f29c9530e773' => :mavericks
-    sha1 '3000d18448fd7df1eda9431deab3e5dc25ef9f0d' => :mountain_lion
-    sha1 '17f099726692a0d273e81c5eaf0633ebcbc6144a' => :lion
+    revision 3
+    sha1 'a183ade7f422371d2797e193b3d248f2a0afcca2' => :mavericks
+    sha1 '4da8eca4304b95ad3f9404376135248d58ca4b29' => :mountain_lion
+    sha1 'cd65a77cdd7fdcfc82169baa876f43bfb03f7e9e' => :lion
   end
 
   option :cxx11
@@ -20,7 +20,7 @@ class ImichkaVtk < Formula
   depends_on 'cmake' => :build
   depends_on :x11 => :optional
   depends_on 'qt' => :optional
-  depends_on :python => :recommended
+  depends_on :python => :optional
   depends_on 'boost' => :recommended
   depends_on :fontconfig => :recommended
   depends_on 'hdf5' => :recommended
