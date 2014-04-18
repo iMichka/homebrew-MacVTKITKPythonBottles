@@ -22,13 +22,18 @@ You will need to have Homebrew's Python (2.7.6) installed.
 
 ## Possible problems and Warnings
 
- - I did not try to use this ITK binaries to build a C++ app with it. Just tell me whether it does not work.
- - The WrapITK.pth file is manually created in /usr/local/lib/python2.7/site-packages. ITK does not have the same folder structure as VTK. I will try to see whether I can submit a patch for this soon. The problem here is that if you *brew uninstall insighttoolkit*, the WrapITK.pth will stay there ...
+ - You can use these binaries to link a c++ code against it, but only on 10.7 and 10.8 ! For 10.9, recompile ITK from source withouth python.
+ - The WrapITK.pth file is manually created in /usr/local/lib/python2.7/site-packages. The problem here is that if you *brew uninstall imichka-insighttoolkit*, the WrapITK.pth will stay there ...
  - If you get the following error with ITK (especially on OS 10.7.5), **please install XQartz 2.7.5. This will install the missing file**
 ```
 Library not loaded: /opt/X11/lib/libfontconfig.1.dylib
 Referenced from: /usr/local/lib/libvtkRenderingFreeTypeFontConfig-6.1.1.dylib
 Reason: image not found
+```
+ - On OS X 10.9 you will get the following warning, just ignore it.
+```
+Warning: imichka-insighttoolkit dependency boost was built with a different C++ standard
+library (libc++ from clang). This could cause problems at runtime.
 ```
 
 ## Why unofficial binaries ?
