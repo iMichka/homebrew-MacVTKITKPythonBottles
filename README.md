@@ -10,7 +10,7 @@ The files are provided "as is" without warranty or support of any kind.
 ## Current versions
 
   - VTK 6.1.0
-  - ITK 4.5.1
+  - ITK 4.5.2
 
 You will need to have Homebrew's Python (2.7.6) installed.
 
@@ -49,8 +49,10 @@ I found a way to trick GCCXML into finding the right include headers to be able 
 My trick to get ITK to compile with Python wrappings under OS 10.7.5 and OS 10.8.5:
 
   - Rename /usr/include to /usr/_include
-  - brew install insighttoolkit --with-python
+  - Modify /usr/local/Library/Homebrew/os/mac/xcode.rb, line 162, return false instead of !!detect_version
+  - brew install --build-bottle iMichka/MacVTKITKPythonBottles/imichka-insighttoolkit --with-python
   - Rename back /usr/_include to /usr/include
+  - Reset the xcode.rb file back
 
 This is quite a dirty hack, if somebody has an explanation of why it works, feel free to enlight me. The used formulas to built the binaries are the one in this github repository. The VTK formula should be the same as the one in the official homebrew-science repository, the ITK formula is adapted for compilation under OS 10.7.5.
 
