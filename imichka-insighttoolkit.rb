@@ -78,7 +78,7 @@ class ImichkaInsighttoolkit < Formula
   def post_install
     # Put manually the pth file in the site-packages folder
     # Waiting for modification of the ITK install script to have the following structure :
-    # /Cellar/imichka-insighttoolkit/4.5.1/lib/python/site-packages
+    # /Cellar/imichka-insighttoolkit/4.5.2/lib/python/site-packages
     if pour_bottle? and Formula.factory('python').installed?
       File.open("#{HOMEBREW_PREFIX}/lib/python2.7/site-packages/WrapITK.pth", 'w') {|f| f.write("#{HOMEBREW_PREFIX}/Cellar/imichka-insighttoolkit/4.5.2/lib/ITK-4.5/Python") }
     end
