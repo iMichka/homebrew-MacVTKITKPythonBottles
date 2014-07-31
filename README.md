@@ -8,9 +8,9 @@ The VTK and ITK binaries were compiled with some specific options, look at the f
 ## Current versions
 
   - VTK 6.1.0
-  - ITK 4.5.2
+  - ITK 4.6.0
 
-You will need to have Homebrew's Python (2.7.6) installed.
+You will need to have Homebrew's Python (2.7.8) installed.
 
 ## How to use
 
@@ -47,13 +47,22 @@ I found a way to trick GCCXML into finding the right include headers to be able 
 My trick to get ITK to compile with Python wrappings under OS 10.7.5 and OS 10.8.5:
 
   - Rename /usr/include to /usr/_include
-  - Modify /usr/local/Library/Homebrew/os/mac/xcode.rb, line 162, return false instead of !!detect_version
-  - brew install --build-bottle iMichka/MacVTKITKPythonBottles/imichka-insighttoolkit --with-python
+  - Build bottles
   - Rename back /usr/_include to /usr/include
   - Reset the xcode.rb file back
+
+Build commands:
+brew install imichka-vtk --with-python --with-qt --build-bottle -v
+brew install imichka-insighttoolkit --with-python --build-bottle -v
+
+Go back to commit 5d79541 (19 mai 2014).
+Homebrew fixed their env after this commit, so my hack will no more work. Bottling from the old homebrew version is still possible.
+It's getting more and more difficult to keep this running ...
+Apply this patch to homebrew: https://gist.github.com/iMichka/18a3dbc56a34585baef1
 
 This is quite a dirty hack, if somebody has an explanation of why it works, feel free to enlight me. The used formulas to built the binaries are the one in this github repository. The VTK formula should be the same as the one in the official homebrew-science repository, the ITK formula is adapted for compilation under OS 10.7.5.
 
 ## Future of this project
 
 There are some discussions continuing to provide better support for Python wrapping. This is only a temporary solution I provide so that we can still use ITK on OS 10.9, which leaves some time to fix the wrapping problem.
+
