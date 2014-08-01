@@ -2,18 +2,17 @@ require 'formula'
 
 class ImichkaInsighttoolkit < Formula
   homepage 'http://www.itk.org'
-  url 'http://downloads.sourceforge.net/project/itk/itk/4.5/InsightToolkit-4.5.2.tar.gz'
-  sha1 '91b14d4a67e837b3e0dc12d2d7ad5b3fdaae5a8e'
+  url 'http://downloads.sourceforge.net/project/itk/itk/4.6/InsightToolkit-4.6.0.tar.gz'
+  sha1 '66f2d7b4b464af561aeb5dc77951086a2ac34ffe'
   head 'git://itk.org/ITK.git'
 
   bottle do
     root_url 'http://download.sf.net/project/macvtkitkpythonbottles/itk'
     revision 1
-    sha1 'c24926a3691edb12ff4e103e49a6f76a316314de' => :mavericks
-    sha1 'c24926a3691edb12ff4e103e49a6f76a316314de' => :mountain_lion
-    sha1 '2ff126aa2a7179675aa8bde275db652710b9679d' => :lion
+    sha1 'f5b1d9e139be078e0dfbbdbd891d1a757c1cd9c5' => :mavericks
+    sha1 'f5b1d9e139be078e0dfbbdbd891d1a757c1cd9c5' => :mountain_lion
+    sha1 '8de65e155dca400f5c5314f0807a29bd124a4458' => :lion
   end
-
 
   option :cxx11
   cxx11dep = (build.cxx11?) ? ['c++11'] : []
@@ -43,6 +42,7 @@ class ImichkaInsighttoolkit < Formula
       -DITK_USE_STRICT_CONCEPT_CHECKING=ON
       -DITK_USE_SYSTEM_ZLIB=ON
       -DModule_ITKLevelSetsv4Visualization=ON
+      -DModule_SCIFIO=ON
     ]
     args << ".."
     args << '-DBUILD_EXAMPLES=' + ((build.include? 'examples') ? 'ON' : 'OFF')
@@ -69,6 +69,8 @@ class ImichkaInsighttoolkit < Formula
         ]
         # CMake picks up the system's python dylib, even if we have a brewed one.
         args << "-DPYTHON_LIBRARY='#{%x(python-config --prefix).chomp}/lib/libpython2.7.dylib'"
+        args << "-DPYTHON_INCLUDE_DIR='#{%x(python-config --prefix).chomp}/Headers'"
+
       end
       system "cmake", *args
       system "make", "install"
@@ -77,10 +79,8 @@ class ImichkaInsighttoolkit < Formula
 
   def post_install
     # Put manually the pth file in the site-packages folder
-    # Waiting for modification of the ITK install script to have the following structure :
-    # /Cellar/imichka-insighttoolkit/4.5.2/lib/python/site-packages
     if pour_bottle? and Formula.factory('python').installed?
-      File.open("#{HOMEBREW_PREFIX}/lib/python2.7/site-packages/WrapITK.pth", 'w') {|f| f.write("#{HOMEBREW_PREFIX}/Cellar/imichka-insighttoolkit/4.5.2/lib/ITK-4.5/Python") }
+      File.open("#{HOMEBREW_PREFIX}/lib/python2.7/site-packages/WrapITK.pth", 'w') {|f| f.write("#{HOMEBREW_PREFIX}/Cellar/imichka-insighttoolkit/4.6.0/lib/ITK-4.6/Python") }
     end
   end
 
