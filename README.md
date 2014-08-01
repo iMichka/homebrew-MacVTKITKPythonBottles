@@ -42,7 +42,7 @@ The main problem this project tries to tackle is to get ITK to install on OS X w
 Because of incompatibilities between GCCXML and Clang (GCCXML is converting the highly templated ITK C++ code to XML files, which are then converted for the Python wrapping), it is very tedious to install ITK on OS X.
 Incidentally, the compilation time can be very long (up to 2 hours for ITK on slow computers), so a fast installation through binaries is always welcome.
 
-I found a way to trick GCCXML into finding the right include headers to be able to compile ITK with Python wrappers on OS 10.7. For OS 10.8 and 10.9, the same binary is used as the one compiled under 10.7. This "just works" for the python bindings.(It's no more possible to compile ITK 4.5 under 10.8 and 10.9).
+I found a way to trick GCCXML into finding the right include headers to be able to compile ITK with Python wrappers on OS 10.7. For OS 10.9, the same binary is used as the one compiled under 10.8. This "just works" for the python bindings.(It's no more possible to compile ITK 4.5 under 10.9).
 
 My trick to get ITK to compile with Python wrappings under OS 10.7.5 and OS 10.8.5:
 
@@ -51,14 +51,14 @@ My trick to get ITK to compile with Python wrappings under OS 10.7.5 and OS 10.8
   - Rename back /usr/_include to /usr/include
   - Reset the xcode.rb file back
 
-Build commands:
-brew install imichka-vtk --with-python --with-qt --build-bottle -v
-brew install imichka-insighttoolkit --with-python --build-bottle -v
-
 Go back to commit 5d79541 (19 mai 2014).
 Homebrew fixed their env after this commit, so my hack will no more work. Bottling from the old homebrew version is still possible.
-It's getting more and more difficult to keep this running ...
 Apply this patch to homebrew: https://gist.github.com/iMichka/18a3dbc56a34585baef1
+
+Build commands:
+
+- brew install imichka-vtk --with-python --with-qt --build-bottle -v
+- brew install imichka-insighttoolkit --with-python --build-bottle -v
 
 This is quite a dirty hack, if somebody has an explanation of why it works, feel free to enlight me. The used formulas to built the binaries are the one in this github repository. The VTK formula should be the same as the one in the official homebrew-science repository, the ITK formula is adapted for compilation under OS 10.7.5.
 
