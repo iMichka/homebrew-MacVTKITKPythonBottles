@@ -22,9 +22,9 @@ class ImichkaInsighttoolkit < Formula
   depends_on 'opencv' => [:optional] + cxx11dep
   depends_on :python => :optional
   depends_on 'fftw' => :recommended
-  depends_on 'hdf5' => [:optional, '--enable-cxx'] + cxx11dep
+  depends_on 'hdf5' => [:recommended, "enable-cxx"] + cxx11dep
   depends_on 'jpeg' => :recommended
-  depends_on 'libpng' => :recommended
+  depends_on :libpng => :recommended
   depends_on 'libtiff' => :recommended
 
   option 'examples', 'Compile and install various examples'
@@ -47,12 +47,12 @@ class ImichkaInsighttoolkit < Formula
     args << ".."
     args << '-DBUILD_EXAMPLES=' + ((build.include? 'examples') ? 'ON' : 'OFF')
     args << '-DModule_ITKVideoBridgeOpenCV=' + ((build.with? 'opencv') ? 'ON' : 'OFF')
-    args << '-DITKV3_COMPATIBILITY:BOOL=' + ((build.include? 'with-itkv3-compatibility') ? 'ON' : 'OFF')
+    args << '-DITKV3_COMPATIBILITY:BOOL=' + ((build.with? 'itkv3-compatibility') ? 'ON' : 'OFF')
 
     args << '-DITK_USE_SYSTEM_FFTW=ON' << '-DITK_USE_FFTWF=ON' << '-DITK_USE_FFTWD=ON' if build.with? 'fftw'
     args << '-DITK_USE_SYSTEM_HDF5=ON' if build.with? 'hdf5'
     args << '-DITK_USE_SYSTEM_JPEG=ON' if build.with? 'jpeg'
-    args << '-DITK_USE_SYSTEM_PNG=ON' if build.with? 'libpng'
+    args << '-DITK_USE_SYSTEM_PNG=ON' if build.with? :libpng
     args << '-DITK_USE_SYSTEM_TIFF=ON' if build.with? 'libtiff'
     args << '-DITK_LEGACY_REMOVE=ON' if build.include? 'remove-legacy'
     args << '-DModule_ITKReview=ON' if build.with? 'review'
@@ -69,8 +69,6 @@ class ImichkaInsighttoolkit < Formula
         ]
         # CMake picks up the system's python dylib, even if we have a brewed one.
         args << "-DPYTHON_LIBRARY='#{%x(python-config --prefix).chomp}/lib/libpython2.7.dylib'"
-        args << "-DPYTHON_INCLUDE_DIR='#{%x(python-config --prefix).chomp}/Headers'"
-
       end
       system "cmake", *args
       system "make", "install"
