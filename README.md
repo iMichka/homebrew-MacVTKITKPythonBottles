@@ -14,12 +14,18 @@ The different binaries were compiled with some specific options, look at the for
 
 ## How to install SimpleITK
 
-**Important note: VTK and ITK need to be installed for SimpleITK to work. Please install all the packages manually following the order given here:**
+**VTK and ITK need to be installed for SimpleITK to work. Please install all the packages manually following the order given here:**
 
   - brew tap iMichka/MacVTKITKPythonBottles
   - brew install iMichka/MacVTKITKPythonBottles/imichka-vtk
   - brew install iMichka/MacVTKITKPythonBottles/imichka-insighttoolkit
   - brew install iMichka/MacVTKITKPythonBottles/imichka-simpleitk
+
+**If you want to use ITK Python wrappings the package is now imichka-insighttoolkit-wrapitk:**
+
+  - brew tap iMichka/MacVTKITKPythonBottles
+  - brew install iMichka/MacVTKITKPythonBottles/imichka-vtk
+  - brew install iMichka/MacVTKITKPythonBottles/imichka-insighttoolkit-wrapitk
 
 ## Important note
 
