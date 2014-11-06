@@ -12,7 +12,7 @@ The different binaries were compiled with some specific options, look at the for
   - imichka-insighttoolkit-wrapitk : ITK 4.6.1, Python only
   - imichka-simpleitk : SimpleITK 0.8.0, Python
 
-## How to install SimpleITK
+## How to install
 
 **VTK and ITK need to be installed for SimpleITK to work. Please install all the packages manually following the order given here:**
 
