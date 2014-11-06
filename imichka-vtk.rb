@@ -9,10 +9,10 @@ class ImichkaVtk < Formula
 
   bottle do
     root_url 'http://download.sf.net/project/macvtkitkpythonbottles/vtk'
-    revision 4
-    sha1 '8b1dee214aa66bd8bcf2a1108634ee30de86ab6d' => :mavericks
-    sha1 '4cf7e32799a046c1faf47c09502ee86baf36128b' => :mountain_lion
-    sha1 '8ad5e00e0e9bceddcb2c41001beb59785d9323a9' => :lion
+    revision 5
+    sha1 '913dee9d683c780b42a535eea2bd0a1027b3e89d' => :yosemite
+    sha1 '08a317e9a7ef387dcd8bfbb0753c47a4484d3945' => :mavericks
+    sha1 '981c024dcf17e57d754c6ff1582a9d581a95354c' => :mountain_lion
   end
 
   option :cxx11
