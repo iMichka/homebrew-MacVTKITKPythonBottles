@@ -6,6 +6,14 @@ class ImichkaSimpleitk < Formula
   sha1 "7f62f397d0b85dfe52bf2fd66155e5b3cdc95af9"
   head "https://github.com/SimpleITK/SimpleITK.git"
 
+  bottle do
+    root_url 'http://download.sf.net/project/macvtkitkpythonbottles/simpleitk'
+    revision 1
+    sha1 'daa8937d8d87e10a8a95329a4bd5e3f63ab86f50' => :yosemite
+    sha1 'ac9a465ff2dd4082a9d5f58b8339b6df5ae88cf2' => :mavericks
+    sha1 'f6b922db51acdbb147195f14107c2b5a60377287' => :mountain_lion
+  end
+
   depends_on "cmake" => :build
   depends_on "iMichka/MacVTKITKPythonBottles/imichka-insighttoolkit" => [:build, "with-review"]
   depends_on "swig" => :build
