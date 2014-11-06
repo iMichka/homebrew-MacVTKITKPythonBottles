@@ -9,9 +9,9 @@ class ImichkaInsighttoolkitWrapitk < Formula
   bottle do
     root_url 'http://download.sf.net/project/macvtkitkpythonbottles/wrapitk'
     revision 1
-    sha1 '' => :yosemite
-    sha1 '' => :mavericks
-    sha1 '' => :mountain_lion
+    sha1 'adbf78cbf752d607b07c7a205bc460e1433ced80' => :yosemite
+    sha1 'adbf78cbf752d607b07c7a205bc460e1433ced80' => :mavericks
+    sha1 'adbf78cbf752d607b07c7a205bc460e1433ced80' => :mountain_lion
   end
 
   option :cxx11
