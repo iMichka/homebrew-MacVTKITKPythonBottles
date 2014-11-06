@@ -2,16 +2,16 @@ require 'formula'
 
 class ImichkaInsighttoolkit < Formula
   homepage 'http://www.itk.org'
-  url 'http://downloads.sourceforge.net/project/itk/itk/4.6/InsightToolkit-4.6.0.tar.gz'
-  sha1 '66f2d7b4b464af561aeb5dc77951086a2ac34ffe'
+  url 'https://downloads.sourceforge.net/project/itk/itk/4.6/InsightToolkit-4.6.1.tar.gz'
+  sha1 '95b879b17a8e2c4727b363037a3af4377095422d'
   head 'git://itk.org/ITK.git'
 
   bottle do
     root_url 'http://download.sf.net/project/macvtkitkpythonbottles/itk'
     revision 1
-    sha1 'f5b1d9e139be078e0dfbbdbd891d1a757c1cd9c5' => :mavericks
-    sha1 'f5b1d9e139be078e0dfbbdbd891d1a757c1cd9c5' => :mountain_lion
-    sha1 '8de65e155dca400f5c5314f0807a29bd124a4458' => :lion
+    sha1 '7413b99deb3facef7036d28c0281ef1ab98d7263' => :yosemite
+    sha1 'd9ba0c774854717ee51ecdb29c4d544b791f1744' => :mavericks
+    sha1 '5a7ee8e9351ac669e454f6859eb4c906a324cea3' => :mountain_lion
   end
 
   option :cxx11
@@ -43,6 +43,7 @@ class ImichkaInsighttoolkit < Formula
       -DITK_USE_SYSTEM_ZLIB=ON
       -DModule_ITKLevelSetsv4Visualization=ON
       -DModule_SCIFIO=ON
+      -DModule_ITKVtkGlue=ON
     ]
     args << ".."
     args << '-DBUILD_EXAMPLES=' + ((build.include? 'examples') ? 'ON' : 'OFF')
@@ -64,7 +65,6 @@ class ImichkaInsighttoolkit < Formula
       if build.with? "python"
         args += %W[
           -DITK_WRAP_PYTHON=ON
-          -DModule_ITKVtkGlue=ON
           -DCMAKE_C_FLAGS='-ansi'
         ]
         # CMake picks up the system's python dylib, even if we have a brewed one.
@@ -74,13 +74,4 @@ class ImichkaInsighttoolkit < Formula
       system "make", "install"
     end
   end
-
-  def post_install
-    # Put manually the pth file in the site-packages folder
-    if pour_bottle? and Formula.factory('python').installed?
-      File.open("#{HOMEBREW_PREFIX}/lib/python2.7/site-packages/WrapITK.pth", 'w') {|f| f.write("#{HOMEBREW_PREFIX}/Cellar/imichka-insighttoolkit/4.6.0/lib/ITK-4.6/Python") }
-    end
-  end
-
-
 end
